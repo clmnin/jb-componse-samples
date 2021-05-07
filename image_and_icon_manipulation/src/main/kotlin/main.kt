@@ -1,3 +1,4 @@
+import androidx.compose.desktop.AppManager
 import androidx.compose.desktop.Window
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,9 +14,7 @@ import javax.imageio.ImageIO
 
 fun main() {
     val image = getWindowIcon()
-    Window(
-        icon = image
-    ) {
+    Window {
         val imageAsset = remember { asImageAsset(image) }
         Image(
             bitmap = imageAsset,
@@ -23,6 +22,8 @@ fun main() {
             modifier = Modifier.fillMaxSize()
         )
     }
+
+    AppManager.focusedWindow?.setIcon(image)
 }
 
 fun getWindowIcon(): BufferedImage {
