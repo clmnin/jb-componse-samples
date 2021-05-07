@@ -1,20 +1,30 @@
+import androidx.compose.desktop.DesktopTheme
 import androidx.compose.desktop.Window
-import androidx.compose.material.Text
-import androidx.compose.material.Button
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import com.arkivanov.decompose.extensions.compose.jetbrains.rememberRootComponent
 
-fun main() = Window {
-    var text by remember { mutableStateOf("Hello, World!") }
-
-    MaterialTheme {
-        Button(onClick = {
-            text = "Hello, Desktop!"
-        }) {
-            Text(text)
+fun main() {
+    Window("Navigation tutorial") {
+        Surface(modifier = Modifier.fillMaxSize()) {
+            MaterialTheme {
+                DesktopTheme {
+                    RootUi(root()) // Render the Root and its children
+                }
+            }
         }
     }
 }
+
+@Composable
+private fun root(): Root =
+    // The rememberRootComponent function provides the root ComponentContext and remembers the instance or Root
+    rememberRootComponent { componentContext ->
+        Root(
+            componentContext = componentContext,
+            database = DatabaseImpl() // Supply dependencies
+        )
+    }

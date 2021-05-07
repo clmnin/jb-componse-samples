@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
+    implementation("com.arkivanov.decompose:extensions-compose-jetbrains:0.2.4")
 }
 
 tasks.withType<KotlinCompile>() {
